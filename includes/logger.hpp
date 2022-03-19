@@ -38,23 +38,23 @@ namespace logger
 		switch (type)
 		{
 		case QtDebugMsg:
-			tsTextStream << QString("%1 Debug - %2").arg(sCurrDateTime).arg(msg);
+			tsTextStream << QString("%1 Debug - %2").arg(sCurrDateTime).arg(msg) << "\n";
 			break;
 
 		case QtWarningMsg:
-			tsTextStream << QString("%1 Warning - %2").arg(sCurrDateTime).arg(msg);
+			tsTextStream << QString("%1 Warning - %2").arg(sCurrDateTime).arg(msg)<< "\n";
 			break;
 
 		case QtCriticalMsg:
-			tsTextStream << QString("%1 Critical - %2").arg(sCurrDateTime).arg(msg);
+			tsTextStream << QString("%1 Critical - %2").arg(sCurrDateTime).arg(msg)<< "\n";
 			break;
 
 		case QtInfoMsg:
-			tsTextStream << QString("%1 Info - %2").arg(sCurrDateTime).arg(msg);
+			tsTextStream << QString("%1 Info - %2").arg(sCurrDateTime).arg(msg)<< "\n";
 			break;
 			
 		case QtFatalMsg:
-			tsTextStream << QString("%1 Fatal - %2").arg(sCurrDateTime).arg(msg);
+			tsTextStream << QString("%1 Fatal - %2").arg(sCurrDateTime).arg(msg)<< "\n";
 			abort();
 		}
 		tsTextStream.flush();
