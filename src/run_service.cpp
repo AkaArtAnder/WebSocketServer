@@ -2,11 +2,11 @@
 
 #include <QCoreApplication>
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
-    QCoreApplication app(argc, argv);
+	QCoreApplication app(argc, argv);
 
-    webSocketServer::WebSocketServer server(9999);
+	webSocketServer::WebSocketServer server(8181);
 
-    return app.exec(); 
+	return app.exec();
 }

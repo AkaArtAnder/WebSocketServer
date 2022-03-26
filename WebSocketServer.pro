@@ -37,8 +37,7 @@ QMAKE_CFLAGS_WARN_ON += -Wno-deprecated-copy
 QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 
 # Input
-HEADERS += includes/web_socket_server.h \
-            includes/logger.hpp
+HEADERS += includes/web_socket_server.h
 
 SOURCES += src/web_socket_server.cpp \
             src/run_service.cpp

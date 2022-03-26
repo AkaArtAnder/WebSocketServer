@@ -1,5 +1,6 @@
 #include "../includes/web_socket_server.h"
 #include "../includes/logger.hpp"
+#include "../includes/common.hpp"
 
 namespace webSocketServer
 {
@@ -49,23 +50,39 @@ namespace webSocketServer
 	{
 		qDebug() << "New connection";
 
-		std::shared_ptr<QWebSocket> temp(this -> nextPendingConnection());
-		clientSocket_ = temp;
+		auto tempSocket = this -> nextPendingConnection();
 
 		QObject::connect(
-			clientSocket_.get(),
+			tempSocket,
 			&QWebSocket::textMessageReceived,
 			this,
 			&webSocketServer::WebSocketServer::ReadTextDataFrame
 		);
+
+		QObject::connect(
+			tempSocket,
+			&QWebSocket::disconnected,
+			this,
+			&webSocketServer::WebSocketServer::DisconnectInfo
+		);
+
 	}
 
-	void WebSocketServer::ReadTextDataFrame(const QString& message)
+	void WebSocketServer::ReadTextDataFrame(const QString &message)
 	{
 		qDebug() << "New message from client";
 		qDebug() << message;
 
-		clientSocket_ -> sendTextMessage("Hello client");
+		auto clientSocket = qobject_cast<QWebSocket *>(QObject::sender());
+
+		clientSocket -> sendTextMessage("Hello client");
+	}
+
+	void WebSocketServer::DisconnectInfo()
+	{
+		qDebug() << "Disconnected client";
+		auto clientSocket = qobject_cast<QWebSocket *>(QObject::sender());
+		clientSocket -> deleteLater();
 	}
 
 } // namespace webSocketServer

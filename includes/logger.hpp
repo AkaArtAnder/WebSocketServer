@@ -8,6 +8,8 @@
  *
  */
 
+#pragma once
+
 #include <QCoreApplication>
 #include <QFile>
 #include <QDateTime>
@@ -17,12 +19,12 @@ namespace logger
 {
 	/**
 	 * @brief Функция перенаправления логов в указанный файл
-	 * 
+	 *
 	 * @param type тип сообщения
 	 * @param context default
 	 * @param msg тело сообщения
 	 */
-	void logMessage(QtMsgType type, const QMessageLogContext& context, const QString& msg)
+	void logMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 	{
 		QFile fMessFile(qApp->applicationDirPath() + "/Server.log");
 
@@ -42,21 +44,22 @@ namespace logger
 			break;
 
 		case QtWarningMsg:
-			tsTextStream << QString("%1 Warning - %2").arg(sCurrDateTime).arg(msg)<< "\n";
+			tsTextStream << QString("%1 Warning - %2").arg(sCurrDateTime).arg(msg) << "\n";
 			break;
 
 		case QtCriticalMsg:
-			tsTextStream << QString("%1 Critical - %2").arg(sCurrDateTime).arg(msg)<< "\n";
+			tsTextStream << QString("%1 Critical - %2").arg(sCurrDateTime).arg(msg) << "\n";
 			break;
 
 		case QtInfoMsg:
-			tsTextStream << QString("%1 Info - %2").arg(sCurrDateTime).arg(msg)<< "\n";
+			tsTextStream << QString("%1 Info - %2").arg(sCurrDateTime).arg(msg) << "\n";
 			break;
-			
+
 		case QtFatalMsg:
-			tsTextStream << QString("%1 Fatal - %2").arg(sCurrDateTime).arg(msg)<< "\n";
+			tsTextStream << QString("%1 Fatal - %2").arg(sCurrDateTime).arg(msg) << "\n";
 			abort();
 		}
+
 		tsTextStream.flush();
 		fMessFile.flush();
 		fMessFile.close();
